@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Hush Lush - Restaurant Menu & Authentication App
 
-## Getting Started
+A fully responsive, pixel-perfect web application built based on Figma designs, featuring user authentication, guest access, a dynamic food menu with categories and search, interactive promotional carousels, and custom cart interactions.
 
-First, run the development server:
+---
 
-```bash
+## 🚀 Live Deployment & Source Code
+* **Live Demo:** [https://hush-lush-app.vercel.app](https://hush-lush-app.vercel.app)
+* **GitHub Repository:** [https://github.com/jithin045/hush-lush-app](https://github.com/jithin045/hush-lush-app)
+
+---
+
+## 🛠️ Tech Stack & Libraries
+* **Framework:** Next.js (App Router)
+* **Styling:** Tailwind CSS
+* **Animations:** Framer Motion
+* **Form Management & Validation:** React Hook Form & Zod
+* **Icons:** Lucide React & React Icons
+
+---
+
+## 💻 Local Setup & Installation
+
+To run this project locally on your machine, follow these steps:
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/jithin045/hush-lush-app.git](https://github.com/jithin045/hush-lush-app.git)
+   cd hush-lush-app
+Install dependencies:
+
+Bash
+npm install
+Run the development server:
+
+Bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Open the application:
+Open your browser and navigate to http://localhost:3000 to view the app.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Run tests:
+To run validation and interaction tests, execute:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Bash
+npm test
+🔑 Test Credentials (Mock Auth)
+If you want to test the login form manually instead of using the "Sign as Guest" option, use the following credentials:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Email: test@example.com
 
-## Learn More
+Password: Password123
 
-To learn more about Next.js, take a look at the following resources:
+✨ List of Completed Features
+Task 1: Login / Authentication Screen
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Faithfully recreated the Figma login design including typography, logo, terms of use links, and social login button mockups.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Task 2: Email & Password Validation
 
-## Deploy on Vercel
+Implemented robust client-side validation rules using Zod and React Hook Form with instant error handling.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Task 3: Authentication Flow
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Working instant mock authentication flow with local token storage that routes authorized users directly to the restaurant menu.
+
+Task 4: Guest Access
+
+Fully functional "Sign as Guest" option allowing users to bypass login and explore the restaurant menu instantly.
+
+Task 5: Restaurant Home / Food Menu Screen
+
+Responsive layout featuring promotional carousels, dynamic category filtering (For You, Chicken Chop, Fish, Burger, etc.), and real-time search capabilities.
+
+Task 6: Micro-Interactions & Animations
+
+Integrated Framer Motion for smooth entrance and banner slide transitions.
+
+Added custom interactive confirmation modals and toast notifications.
+
+Task 7: Code Quality, Testing & Responsiveness
+
+Modularized code using reusable components (MenuCard, Header, Footer, PromoCarousel, LoginForm).
+
+Separated static data assets cleanly into menuData.js and promoData.js.
+
+Fully responsive design optimized for mobile devices (with a sticky bottom navigation pill) and desktop viewports.
+
+📂 Project Structure
+Plaintext
+src/
+├── app/
+│   ├── layout.js
+│   ├── page.js           # Restaurant Home / Menu Screen
+│   └── login/
+│       └── page.jsx      # Authentication Screen
+├── assets/               # Logos, menu images, promo banners
+├── components/           # Reusable UI components (Header, Footer, MenuCard, etc.)
+├── data/                 # Static content (menuData.js, promoData.js)
+├── features/
+│   └── auth/
+│       └── LoginForm.jsx # Form logic & submission handlers
+└── utils/                # Validation schemas (validation.js) & test files
