@@ -2,11 +2,14 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Search, X } from "lucide-react";
 import logo from "../assets/logo.png";
 
 export const Header = ({ searchQuery, setSearchQuery }) => {
     const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
+    const pathname = usePathname();
 
     return (
         <header className="w-full bg-white shadow-sm sticky top-0 z-40">
@@ -29,16 +32,18 @@ export const Header = ({ searchQuery, setSearchQuery }) => {
 
                 {/* Desktop navigation items */}
                 <nav className="hidden md:flex items-center gap-8 flex-1">
-                    <div className="flex flex-col items-center text-gray-900 cursor-pointer relative">
-                        <span className="font-medium">Menu</span>
-                        <div className="absolute -bottom-5 w-full h-1 bg-[#DC2626] rounded-t-full"></div>
-                    </div>
-                    <div className="flex flex-col items-center text-gray-500 hover:text-gray-900 cursor-pointer">
-                        <span className="font-medium">Outlet</span>
-                    </div>
-                    <div className="flex flex-col items-center text-gray-500 hover:text-gray-900 cursor-pointer">
-                        <span className="font-medium">Account</span>
-                    </div>
+                    <Link href="/" className={`flex flex-col items-center cursor-pointer relative ${pathname === '/' ? 'text-gray-900 font-medium' : 'text-gray-500 hover:text-gray-900'}`}>
+                        <span>Menu</span>
+                        {pathname === '/' && <div className="absolute -bottom-5 w-full h-1 bg-[#DC2626] rounded-t-full"></div>}
+                    </Link>
+                    <Link href="/outlet" className={`flex flex-col items-center cursor-pointer relative ${pathname === '/outlet' ? 'text-gray-900 font-medium' : 'text-gray-500 hover:text-gray-900'}`}>
+                        <span>Outlet</span>
+                        {pathname === '/outlet' && <div className="absolute -bottom-5 w-full h-1 bg-[#DC2626] rounded-t-full"></div>}
+                    </Link>
+                    <Link href="/account" className={`flex flex-col items-center cursor-pointer relative ${pathname === '/account' ? 'text-gray-900 font-medium' : 'text-gray-500 hover:text-gray-900'}`}>
+                        <span>Account</span>
+                        {pathname === '/account' && <div className="absolute -bottom-5 w-full h-1 bg-[#DC2626] rounded-t-full"></div>}
+                    </Link>
                 </nav>
 
                 {/* Search toggles */}

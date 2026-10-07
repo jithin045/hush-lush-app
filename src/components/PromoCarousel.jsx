@@ -37,7 +37,7 @@ export const PromoCarousel = () => {
                         placeholder="blur"
                     />
                     <div className="absolute inset-0 flex flex-col justify-end p-6 text-white bg-gradient-to-t from-black/80 via-black/20 to-transparent">
-                        <h2 className="font-script text-4xl md:text-6xl mb-2 tracking-wide">
+                        <h2 className="font-script text-5xl md:text-6xl mb-2 tracking-wide">
                             {PROMOS[currentIndex].title}
                         </h2>
                         <p className="text-sm md:text-lg font-medium text-gray-200">
@@ -53,11 +53,10 @@ export const PromoCarousel = () => {
                     <button
                         key={index}
                         onClick={() => setCurrentIndex(index)}
-                        className={`transition-all duration-300 rounded-full ${
-                            currentIndex === index
+                        className={`transition-all duration-300 rounded-full ${currentIndex === index
                                 ? "w-4 md:w-6 h-2 md:h-3 bg-white"
                                 : "w-2 md:w-3 h-2 md:h-3 bg-white/50 hover:bg-white/75"
-                        }`}
+                            }`}
                         aria-label={`Go to slide ${index + 1}`}
                     />
                 ))}

@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import {
   Store,
   Menu as MenuIcon,
@@ -161,10 +162,23 @@ export default function Home() {
 
       {/* Mobile bottom navigation bar */}
       <nav className="md:hidden fixed bottom-10 left-4 right-4 bg-white rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.1)] flex justify-between px-6 py-4 z-40">
-        <div className="flex flex-col items-center gap-1 text-gray-500"><Store size={20} /><span className="text-[10px]">Outlet</span></div>
-        <div className="flex flex-col items-center gap-1 text-gray-900 relative"><MenuIcon size={20} /><span className="text-[10px]">Menu</span><div className="absolute -bottom-4 w-8 h-1 bg-[#DC2626] rounded-t-full"></div></div>
-        <div className="flex flex-col items-center gap-1 text-gray-500"><User size={20} /><span className="text-[10px]">Account</span></div>
-        <div className="flex flex-col items-center gap-1 text-gray-500"><MoreHorizontal size={20} /><span className="text-[10px]">More</span></div>
+        <Link href="/outlet" className="flex flex-col items-center gap-1 text-gray-500 hover:text-[#DC2626]">
+          <Store size={20} />
+          <span className="text-[10px]">Outlet</span>
+        </Link>
+        <Link href="/" className="flex flex-col items-center gap-1 text-gray-900 relative">
+          <MenuIcon size={20} />
+          <span className="text-[10px]">Menu</span>
+          <div className="absolute -bottom-4 w-8 h-1 bg-[#DC2626] rounded-t-full"></div>
+        </Link>
+        <Link href="/account" className="flex flex-col items-center gap-1 text-gray-500 hover:text-[#DC2626]">
+          <User size={20} />
+          <span className="text-[10px]">Account</span>
+        </Link>
+        <button onClick={() => showToast('More options coming soon')} className="flex flex-col items-center gap-1 text-gray-500 hover:text-[#DC2626]">
+          <MoreHorizontal size={20} />
+          <span className="text-[10px]">More</span>
+        </button>
       </nav>
     </div>
   )
