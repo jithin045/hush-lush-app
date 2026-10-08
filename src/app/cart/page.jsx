@@ -9,13 +9,8 @@ export default function CartPage() {
     const [cartItems, setCartItems] = useState([])
     const [orderPlaced, setOrderPlaced] = useState(false)
 
-    // Load cart items from localStorage or state management if persisted, 
-    // or simulate cart data for demonstration. 
     useEffect(() => {
-        // For local storage implementation or mock fallback
-        const savedCart = JSON.parse(localStorage.getItem('hushLushCart')) || [
-            // Sample placeholder item if cart is empty on direct navigation
-        ]
+        const savedCart = JSON.parse(localStorage.getItem('hushLushCart')) || []
         setCartItems(savedCart)
     }, [])
 
@@ -47,22 +42,22 @@ export default function CartPage() {
 
     if (orderPlaced) {
         return (
-            <div className="min-h-[70vh] flex flex-col items-center justify-center text-center p-6">
+            <main className="w-full max-w-7xl mx-auto flex-1 flex flex-col items-center justify-center text-center p-6 min-h-[70vh]">
                 <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-3xl mb-4">
                     ✓
                 </div>
                 <h1 className="text-2xl font-bold text-gray-900 mb-2">Order Placed Successfully!</h1>
                 <p className="text-gray-600 mb-6">Thank you for ordering with Hush Lush. Your food is on its way.</p>
-                <Link href="/" className="px-6 py-3 bg-[#DC2626] text-white rounded-xl font-medium shadow-md hover:bg-red-700 transition-colors">
+                <Link href="/menu" className="px-6 py-3 bg-[#DC2626] text-white rounded-xl font-medium shadow-md hover:bg-red-700 transition-colors">
                     Back to Menu
                 </Link>
-            </div>
+            </main>
         )
     }
 
     return (
-        <main className="w-full max-w-4xl mx-auto flex-1 p-4 md:p-12 mb-20">
-            <Link href="/" className="inline-flex items-center gap-2 text-gray-600 hover:text-[#DC2626] mb-6 font-medium transition-colors">
+        <main className="w-full max-w-7xl mx-auto flex-1 p-4 md:p-12 pb-28 md:pb-12">
+            <Link href="/menu" className="inline-flex items-center gap-2 text-gray-600 hover:text-[#DC2626] mb-6 font-medium transition-colors">
                 <ArrowLeft size={18} /> Back to Menu
             </Link>
 
@@ -73,7 +68,7 @@ export default function CartPage() {
             {cartItems.length === 0 ? (
                 <div className="bg-white rounded-2xl p-12 text-center border border-gray-100 shadow-sm">
                     <p className="text-gray-500 mb-4">Your cart is currently empty.</p>
-                    <Link href="/" className="inline-block px-6 py-3 bg-[#DC2626] text-white rounded-xl font-medium shadow-md hover:bg-red-700 transition-colors">
+                    <Link href="/menu" className="inline-block px-6 py-3 bg-[#DC2626] text-white rounded-xl font-medium shadow-md hover:bg-red-700 transition-colors">
                         Explore Menu
                     </Link>
                 </div>
