@@ -1,29 +1,30 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import {
-  Store,
-  Menu as MenuIcon,
-  User,
-  MoreHorizontal,
   ShoppingCart,
   X
 } from 'lucide-react'
 import { MenuCard } from '../components/MenuCard'
 import { PromoCarousel } from '../components/PromoCarousel'
-import { Header } from '../components/Header'
-import { Footer } from '../components/Footer'
 
 import { MENU_CATEGORIES, MENU_ITEMS } from '../data/menuData'
 
 export default function Home() {
+  const router = useRouter()
   const [activeCategory, setActiveCategory] = useState('For You')
   const [searchQuery, setSearchQuery] = useState('')
   const [cart, setCart] = useState([])
   const [toastMessage, setToastMessage] = useState('')
   const [itemToAsk, setItemToAsk] = useState(null) // Controls the item confirmation modal
+
+  // Load existing cart from localStorage on mount
+  useEffect(() => {
+    const savedCart = JSON.parse(localStorage.getItem('hushLushCart')) || []
+    setCart(savedCart)
+  }, [])
 
   // Filter items based on selected category and search input
   const filteredItems = useMemo(() => {
@@ -40,26 +41,28 @@ export default function Home() {
     setTimeout(() => setToastMessage(''), 3000)
   }
 
-  // Add selected item to cart from modal
+  // Add selected item to cart from modal and persist to localStorage for the cart page
   const confirmAddToCart = () => {
     if (itemToAsk) {
-      setCart(prev => [...prev, itemToAsk])
+      const updatedCart = [...cart, itemToAsk]
+      setCart(updatedCart)
+      localStorage.setItem('hushLushCart', JSON.stringify(updatedCart))
       showToast(`Added ${itemToAsk.name} to cart!`)
       setItemToAsk(null)
     }
   }
 
-  // Handle cart button click
+  // Handle cart button click: route to /cart if items exist, otherwise show empty toast
   const handleCartClick = () => {
     if (cart.length === 0) {
       showToast('Your cart is empty')
     } else {
-      showToast(`You have ${cart.length} items ready to order!`)
+      router.push('/cart')
     }
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center relative">
+    <div className="w-full flex-1 flex flex-col items-center relative">
       
       {/* Toast message popup */}
       {toastMessage && (
@@ -105,9 +108,7 @@ export default function Home() {
         </div>
       )}
 
-      <Header searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-
-      <main className="w-full max-w-7xl mx-auto flex-1 flex flex-col pb-48 md:pb-0">
+      <main className="w-full max-w-7xl mx-auto flex-1 flex flex-col">
         <PromoCarousel />
 
         {/* Category filter tabs */}
@@ -143,8 +144,6 @@ export default function Home() {
             </div>
           )}
         </section>
-
-        <Footer />
       </main>
 
       {/* Floating shopping cart button with item count badge */}
@@ -159,27 +158,6 @@ export default function Home() {
           </span>
         )}
       </button>
-
-      {/* Mobile bottom navigation bar */}
-      <nav className="md:hidden fixed bottom-10 left-4 right-4 bg-white rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.1)] flex justify-between px-6 py-4 z-40">
-        <Link href="/outlet" className="flex flex-col items-center gap-1 text-gray-500 hover:text-[#DC2626]">
-          <Store size={20} />
-          <span className="text-[10px]">Outlet</span>
-        </Link>
-        <Link href="/" className="flex flex-col items-center gap-1 text-gray-900 relative">
-          <MenuIcon size={20} />
-          <span className="text-[10px]">Menu</span>
-          <div className="absolute -bottom-4 w-8 h-1 bg-[#DC2626] rounded-t-full"></div>
-        </Link>
-        <Link href="/account" className="flex flex-col items-center gap-1 text-gray-500 hover:text-[#DC2626]">
-          <User size={20} />
-          <span className="text-[10px]">Account</span>
-        </Link>
-        <button onClick={() => showToast('More options coming soon')} className="flex flex-col items-center gap-1 text-gray-500 hover:text-[#DC2626]">
-          <MoreHorizontal size={20} />
-          <span className="text-[10px]">More</span>
-        </button>
-      </nav>
     </div>
   )
 }
