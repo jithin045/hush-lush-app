@@ -26,7 +26,7 @@ export const LoginForm = () => {
         setAuthError('');
         if (data.email === 'test@example.com' && data.password === 'Password123') {
             localStorage.setItem('token', 'mock-jwt-token');
-            router.push('/'); // Navigate straight to the home menu screen
+            router.push('/menu'); // Updated route to navigate straight to the menu page
         } else {
             setAuthError('Invalid credentials. Use test@example.com / Password123');
         }
@@ -35,7 +35,7 @@ export const LoginForm = () => {
     // Allow user to instantly bypass login as a guest
     const loginAsGuest = () => {
         localStorage.setItem('token', 'guest-token');
-        router.push('/');
+        router.push('/menu'); // Updated route to navigate straight to the menu page
     };
 
     // Handler for secondary UI buttons/mockup flows
