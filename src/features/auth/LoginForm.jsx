@@ -21,21 +21,20 @@ export const LoginForm = () => {
         resolver: zodResolver(loginSchema)
     });
 
-    // Handle form submission and mock authentication check (instant response)
+    // Handle form submission and mock authentication check
     const onSubmit = (data) => {
         setAuthError('');
         if (data.email === 'test@example.com' && data.password === 'Password123') {
             localStorage.setItem('token', 'mock-jwt-token');
-            router.push('/menu'); // Updated route to navigate straight to the menu page
+            router.replace('/menu'); // Overwrites login history instead of pushing
         } else {
             setAuthError('Invalid credentials. Use test@example.com / Password123');
         }
     };
 
-    // Allow user to instantly bypass login as a guest
     const loginAsGuest = () => {
         localStorage.setItem('token', 'guest-token');
-        router.push('/menu'); // Updated route to navigate straight to the menu page
+        router.replace('/menu'); 
     };
 
     // Handler for secondary UI buttons/mockup flows
@@ -46,7 +45,7 @@ export const LoginForm = () => {
     return (
         <div className="w-full">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                
+
                 {/* Authentication error banner */}
                 {authError && (
                     <div className="p-3 bg-red-50 text-red-600 text-sm rounded-lg text-center">

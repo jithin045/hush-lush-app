@@ -1,10 +1,22 @@
-"use client";
+'use client';
+
+import { useEffect } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { LoginForm } from '../features/auth/LoginForm';
 import logo from '../assets/logo.png';
 
 export default function LoginPage() {
+    const router = useRouter();
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            router.replace('/menu');
+        }
+    }, [router]);
+
     return (
         <div className="min-h-screen flex items-center justify-center p-4 md:p-8 bg-gray-50 font-sans">
             <motion.div
